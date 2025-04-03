@@ -1,0 +1,40 @@
+services:
+  db:
+    image: mariadb:10.6.4
+    volumes:
+      - ./server_db_data:/var/lib/mysql
+    environment:
+      - MYSQL_ROOT_PASSWORD=${MYSQL_ROOT_PASSWORD}
+      - MYSQL_USER=${MYSQL_USER}
+      - MYSQL_PASSWORD=${MYSQL_PASSWORD}
+      - MYSQL_DATABASE=${MYSQL_DATABASE}
+      - TZ=${TZ}
+    restart: unless-stopped
+
+  observium:
+    image: pelandrun/observium:0.3
+    volumes:
+      - ./observium_logs:/opt/observium/logs
+      - ./observium_rrd:/opt/observium/rrd
+    environment:
+      - OBSERVIUM_ADMIN_USER=${OBSERVIUM_ADMIN_USER}
+      - OBSERVIUM_ADMIN_PASS=${OBSERVIUM_ADMIN_PASS}
+      - OBSERVIUM_DB_HOST=${OBSERVIUM_DB_HOST}
+      - OBSERVIUM_DB_NAME=${OBSERVIUM_DB_NAME}
+      - OBSERVIUM_DB_USER=${OBSERVIUM_DB_USER}
+      - OBSERVIUM_DB_PASS=${OBSERVIUM_DB_PASS}
+      - OBSERVIUM_BASE_URL=${OBSERVIUM_BASE_URL}
+      - TZ=${TZ}
+    dns:
+      - 127.0.0.53
+    ports:
+      - "8888:80"
+    restart: unless-stopped
+    depends_on:
+      - db
+
+networks:
+  default:
+    external:
+      name: frontend_net
+

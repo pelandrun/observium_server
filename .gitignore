@@ -1,0 +1,4 @@
+.env
+server_db_data/
+observium_logs/
+observium_rrd/
