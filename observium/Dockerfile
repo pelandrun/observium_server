@@ -32,8 +32,7 @@
 
 FROM ubuntu:22.04
 
-LABEL maintainer "somsakc@hotmail.com"
-LABEL version="1.7"
+LABEL version="2.0"
 LABEL description="Docker container for Observium Community Edition"
 
 ARG OBSERVIUM_ADMIN_USER=admin
@@ -46,6 +45,7 @@ ARG OBSERVIUM_DB_NAME=observium
 # set environment variables
 ENV LANG en_US.UTF-8
 ENV LANGUAGE en_US.UTF-8
+ENV TZ=UTC
 ENV OBSERVIUM_DB_HOST=$OBSERVIUM_DB_HOST
 ENV OBSERVIUM_DB_USER=$OBSERVIUM_DB_USER
 ENV OBSERVIUM_DB_PASS=$OBSERVIUM_DB_PASS
