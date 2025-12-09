@@ -59,7 +59,7 @@ RUN apt-get update && \
     imagemagick apache2 python3-pymysql python-is-python3 monitoring-plugins-basic \
     monitoring-plugins-common monitoring-plugins-standard tzdata \
     libvirt-clients \
-    cron curl locales supervisor wget dnsmasq --no-install-recommends && \
+    cron curl locales supervisor wget dnsmasq php-mbstring php-curl --no-install-recommends && \
     apt-get clean && \
     rm -f /etc/apache2/sites-available/* && \
     rm -f /etc/cron.d/* && \
